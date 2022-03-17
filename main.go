@@ -53,10 +53,16 @@ func main() {
 
 	// dest := conv.Compute(img)
 
-	dest := operation.BLUR.Compute(img)
+	// dest := operation.BLUR.Compute(img)
+	// dest := operation.GAUSS_3x3.Compute(img)
+	dest := operation.EDGE_DETECTION_1.Compute(img)
+	// dest := operation.EDGE_DETECTION_2.Compute(img)
+	// dest := operation.EDGE_DETECTION_3.Compute(img)
+	// dest := operation.SHARPNESS_IMPROVEMENT.Compute(img)
+
 	createWindow("dest", dest)
 
-	// gorgba.WriteRGB("./result.rgb", img)
+	// rgb.WriteRGB("./nice-error.rgb", img)
 
 	// myApp := app.New()
 	// wSrc := myApp.NewWindow("Lena src")
