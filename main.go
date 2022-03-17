@@ -54,13 +54,17 @@ func main() {
 	// dest := conv.Compute(img)
 
 	// dest := operation.BLUR.Compute(img)
-	// dest := operation.GAUSS_3x3.Compute(img)
-	dest := operation.EDGE_DETECTION_1.Compute(img)
-	// dest := operation.EDGE_DETECTION_2.Compute(img)
-	// dest := operation.EDGE_DETECTION_3.Compute(img)
-	// dest := operation.SHARPNESS_IMPROVEMENT.Compute(img)
+	//dest := operation.GAUSS_3x3.Compute(img)
+	// dest := operation.EDGE_DETECTION_1.Compute(img)
+	//dest := operation.EDGE_DETECTION_2.Compute(img)
+	//dest := operation.EDGE_DETECTION_3.Compute(img)
+	//dest := operation.SHARPNESS_IMPROVEMENT.Compute(img)
+	//dest := operation.IDENTITY.Compute(img)
+	//dest := operation.EMBOSS.Compute(img)
 
-	createWindow("dest", dest)
+	//	operation.THRESHOLD_BINARY.Compute(img)
+	operation.THRESHOLD_GRAY.Compute(img)
+	createWindow("dest", img)
 
 	// rgb.WriteRGB("./nice-error.rgb", img)
 

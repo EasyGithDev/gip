@@ -37,6 +37,22 @@ func (gp *GoPixel) GetAlpha() byte {
 	return gp.alpha
 }
 
+func (gp *GoPixel) SetRed(red byte) {
+	gp.red = red
+}
+
+func (gp *GoPixel) SetGreen(green byte) {
+	gp.green = green
+}
+
+func (gp *GoPixel) SetBlue(blue byte) {
+	gp.blue = blue
+}
+
+func (gp *GoPixel) SetAlpha(alpha byte) {
+	gp.alpha = alpha
+}
+
 func (gp *GoPixel) GetColor(channel byte) byte {
 	switch channel {
 	case 0:
