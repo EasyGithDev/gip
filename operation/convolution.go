@@ -1,7 +1,7 @@
-package gooperation
+package operation
 
 import (
-	"github.com/easygithdev/gip/goimage"
+	"github.com/easygithdev/gip/image"
 )
 
 var BLUR *Convolution = NewConvolution(
@@ -22,7 +22,7 @@ func NewConvolution(matrix [][]float32, div float32) *Convolution {
 	return &conv
 }
 
-func (conv *Convolution) Compute(img *goimage.GoImage) *goimage.GoImage {
+func (conv *Convolution) Compute(img *image.GoImage) *image.GoImage {
 
 	dest := img
 	w, h := img.GetDimension()

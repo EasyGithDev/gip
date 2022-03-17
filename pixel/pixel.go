@@ -1,4 +1,4 @@
-package gopixel
+package pixel
 
 type GoPixel struct {
 	red   byte

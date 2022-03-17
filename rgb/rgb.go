@@ -1,4 +1,4 @@
-package gorgba
+package rgb
 
 import (
 	"fmt"
@@ -6,10 +6,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/easygithdev/gip/goimage"
+	"github.com/easygithdev/gip/image"
 )
 
-func ReadRGB(filename string, width int, height int, gi *goimage.GoImage) {
+func ReadRGB(filename string, width int, height int, gi *image.GoImage) {
 	f, err := os.Open(filename)
 	if err != nil {
 		log.Fatalf("unable to read file: %v", err)
@@ -50,7 +50,7 @@ func ReadRGB(filename string, width int, height int, gi *goimage.GoImage) {
 	}
 }
 
-func WriteRGB(filename string, gi *goimage.GoImage) {
+func WriteRGB(filename string, gi *image.GoImage) {
 	f, err := os.Create(filename)
 	if err != nil {
 		log.Fatalf("unable to read file: %v", err)

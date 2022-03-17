@@ -6,15 +6,15 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
-	"github.com/easygithdev/gip/goimage"
-	"github.com/easygithdev/gip/gooperation"
-	"github.com/easygithdev/gip/gorgba"
+	"github.com/easygithdev/gip/image"
+	"github.com/easygithdev/gip/operation"
+	"github.com/easygithdev/gip/rgb"
 )
 
 const WIDTH = 512
 const HEIGTH = 512
 
-func createRaster(gi *goimage.GoImage) *canvas.Raster {
+func createRaster(gi *image.GoImage) *canvas.Raster {
 	return canvas.NewRasterWithPixels(
 		func(x, y, w, h int) color.Color {
 
@@ -26,7 +26,7 @@ func createRaster(gi *goimage.GoImage) *canvas.Raster {
 		})
 }
 
-func createWindow(title string, gi *goimage.GoImage) {
+func createWindow(title string, gi *image.GoImage) {
 
 	myApp := app.New()
 	wSrc := myApp.NewWindow(title)
@@ -38,10 +38,10 @@ func createWindow(title string, gi *goimage.GoImage) {
 
 func main() {
 
-	img := goimage.NewGoImage()
+	img := image.NewGoImage()
 
 	// gorgba.ReadRGBA("result.rgb", img)
-	gorgba.ReadRGB("data/lena_color.rgb", WIDTH, HEIGTH, img)
+	rgb.ReadRGB("data/lena_color.rgb", WIDTH, HEIGTH, img)
 
 	// matrix := [][]float32{
 	// 	{0.0, 0.0, 0.0},
@@ -53,7 +53,7 @@ func main() {
 
 	// dest := conv.Compute(img)
 
-	dest := gooperation.BLUR.Compute(img)
+	dest := operation.BLUR.Compute(img)
 	createWindow("dest", dest)
 
 	// gorgba.WriteRGB("./result.rgb", img)

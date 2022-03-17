@@ -1,6 +1,6 @@
-package gohistogram
+package histogram
 
-import "github.com/easygithdev/gip/gopixel"
+import "github.com/easygithdev/gip/pixel"
 
 type GoHistogram struct {
 	t [4][256]int
@@ -17,7 +17,7 @@ func NewGoHistogram() *GoHistogram {
 	return &gh
 }
 
-func (gh *GoHistogram) SetColor(pixel *gopixel.GoPixel) {
+func (gh *GoHistogram) SetColor(pixel *pixel.GoPixel) {
 	gh.t[0][pixel.GetRed()]++
 	gh.t[1][pixel.GetGreen()]++
 	gh.t[2][pixel.GetBlue()]++

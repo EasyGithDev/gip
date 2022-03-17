@@ -2,27 +2,27 @@ module github.com/easygithdev/gip
 
 go 1.17
 
-replace github.com/easygithdev/gip/goimage => ./goimage
+replace github.com/easygithdev/gip/image => ./image
 
-replace github.com/easygithdev/gip/gopixel => ./gopixel
+replace github.com/easygithdev/gip/pixel => ./pixel
 
-replace github.com/easygithdev/gip/gohistogram => ./gohistogram
+replace github.com/easygithdev/gip/histogram => ./histogram
 
-replace github.com/easygithdev/gip/gooperation => ./gooperation
+replace github.com/easygithdev/gip/operation => ./operation
 
-replace github.com/easygithdev/gip/gorgba => ./gorgba
+replace github.com/easygithdev/gip/rgb => ./rgb
 
 require (
 	fyne.io/fyne/v2 v2.1.3
-	github.com/easygithdev/gip/goimage v0.0.0-00010101000000-000000000000
-	github.com/easygithdev/gip/gooperation v0.0.0-00010101000000-000000000000
-	github.com/easygithdev/gip/gorgba v0.0.0-00010101000000-000000000000
+	github.com/easygithdev/gip/image v0.0.0-00010101000000-000000000000
+	github.com/easygithdev/gip/operation v0.0.0-00010101000000-000000000000
+	github.com/easygithdev/gip/rgb v0.0.0-00010101000000-000000000000
 )
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/easygithdev/gip/gohistogram v0.0.0-00010101000000-000000000000 // indirect
-	github.com/easygithdev/gip/gopixel v0.0.0-00010101000000-000000000000 // indirect
+	github.com/easygithdev/gip/histogram v0.0.0-00010101000000-000000000000 // indirect
+	github.com/easygithdev/gip/pixel v0.0.0-00010101000000-000000000000 // indirect
 	github.com/fredbi/uri v0.0.0-20181227131451-3dcfdacbaaf3 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-gl/gl v0.0.0-20211210172815-726fda9656d6 // indirect

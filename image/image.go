@@ -1,8 +1,8 @@
-package goimage
+package image
 
 import (
-	"github.com/easygithdev/gip/gohistogram"
-	"github.com/easygithdev/gip/gopixel"
+	"github.com/easygithdev/gip/histogram"
+	"github.com/easygithdev/gip/pixel"
 )
 
 const RED_CHANNEL = 0
@@ -15,23 +15,23 @@ type GoImage struct {
 	height   int
 	channels byte
 	/* Palette-based image pixels */
-	pixels [][]*gopixel.GoPixel
-	histo  *gohistogram.GoHistogram
+	pixels [][]*pixel.GoPixel
+	histo  *histogram.GoHistogram
 }
 
 func NewGoImage() *GoImage {
 	img := GoImage{}
-	img.histo = gohistogram.NewGoHistogram()
+	img.histo = histogram.NewGoHistogram()
 	return &img
 }
 
 func (gi *GoImage) SetDimension(w int, h int) {
 	gi.width = w
 	gi.height = h
-	gi.pixels = make([][]*gopixel.GoPixel, w)
+	gi.pixels = make([][]*pixel.GoPixel, w)
 
 	for i := range gi.pixels {
-		gi.pixels[i] = make([]*gopixel.GoPixel, h)
+		gi.pixels[i] = make([]*pixel.GoPixel, h)
 	}
 
 }
@@ -48,19 +48,19 @@ func (gi *GoImage) GetChannels() byte {
 	return gi.channels
 }
 
-func (gi *GoImage) CreatetPixel() *gopixel.GoPixel {
-	return gopixel.NewGoPixel()
+func (gi *GoImage) CreatetPixel() *pixel.GoPixel {
+	return pixel.NewGoPixel()
 }
 
-func (gi *GoImage) SetPixel(x int, y int, gp *gopixel.GoPixel) {
+func (gi *GoImage) SetPixel(x int, y int, gp *pixel.GoPixel) {
 	gi.pixels[x][y] = gp
 }
 
-func (gi *GoImage) GetPixel(x int, y int) *gopixel.GoPixel {
+func (gi *GoImage) GetPixel(x int, y int) *pixel.GoPixel {
 	return gi.pixels[x][y]
 }
 
-func (gi *GoImage) GetHistogram() *gohistogram.GoHistogram {
+func (gi *GoImage) GetHistogram() *histogram.GoHistogram {
 	return gi.histo
 }
 
