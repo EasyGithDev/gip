@@ -19,8 +19,8 @@ func ReadRGB(filename string, width int, height int, gi *image.GoImage) {
 	gi.SetDimension(width, height)
 	gi.SetChannels(3)
 	infos := gi.GetInfos()
-	buf := make([]byte, 3)
-	i, j := 0, 0
+	buf := make([]byte, 3*width)
+	x, y := 0, 0
 
 	for {
 		n, err := f.Read(buf)
@@ -33,19 +33,26 @@ func ReadRGB(filename string, width int, height int, gi *image.GoImage) {
 		}
 		if n > 0 {
 
-			pixel := gi.CreatetPixel()
-			pixel.SetRGBA(buf[0], buf[1], buf[2], 0xff)
-			gi.SetPixel(i, j, pixel)
+			for i := 0; i < n; i = i + 3 {
 
-			infos.SetColor(pixel)
+				r := buf[i]
+				g := buf[i+1]
+				b := buf[i+2]
 
-			if i < width-1 {
-				i++
-			} else {
-				i = 0
-				j++
+				// remvoving the black background
+				if r == 0 && g == 0 && b == 0 {
+					continue
+				}
 
+				pixel := gi.CreatetPixel()
+				pixel.SetRGBA(r, g, b, 0xff)
+				gi.SetPixel(x, y, pixel)
+				infos.SetColor(pixel)
+				x++
 			}
+			x = 0
+			y++
+
 		}
 	}
 }
