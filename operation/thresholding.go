@@ -109,6 +109,28 @@ var FN_BINARY_BY_VALUE = func(gp *pixel.GoPixel, val byte) *pixel.GoPixel {
 	return gp
 }
 
+var FN_BINARY_BY_VALUES = func(gp *pixel.GoPixel, val []byte) *pixel.GoPixel {
+
+	if gp.GetRed() >= val[0] {
+		gp.SetRed(255)
+	} else {
+		gp.SetRed(0)
+	}
+
+	if gp.GetGreen() >= val[1] {
+		gp.SetGreen(255)
+	} else {
+		gp.SetGreen(0)
+	}
+
+	if gp.GetBlue() >= val[2] {
+		gp.SetBlue(255)
+	} else {
+		gp.SetBlue(0)
+	}
+	return gp
+}
+
 type GipThreshold struct {
 	threshold byte
 	fn        func(gp *pixel.GoPixel) *pixel.GoPixel
@@ -132,12 +154,28 @@ func (gt *GipThreshold) Compute(gi *image.GoImage) *image.GoImage {
 	return gi
 }
 
-func ComputeByValue(gi *image.GoImage, value byte) *image.GoImage {
+func ThresholdByValue(gi *image.GoImage, value byte) *image.GoImage {
 	w, h := gi.GetDimension()
 
 	for y := 0; y < h; y++ {
 		for x := 0; x < w; x++ {
 			pixel := FN_BINARY_BY_VALUE(gi.GetPixel(x, y), value)
+			gi.SetPixel(x, y, pixel)
+		}
+	}
+
+	return gi
+}
+
+func ThresholdByAverage(gi *image.GoImage) *image.GoImage {
+	w, h := gi.GetDimension()
+
+	avg := gi.GetInfos().GetAverages()
+	var avgByte []byte = []byte{byte(avg[0]), byte(avg[1]), byte(avg[2])}
+	for y := 0; y < h; y++ {
+		for x := 0; x < w; x++ {
+
+			pixel := FN_BINARY_BY_VALUES(gi.GetPixel(x, y), avgByte)
 			gi.SetPixel(x, y, pixel)
 		}
 	}

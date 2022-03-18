@@ -71,6 +71,14 @@ func (gi *GipInfo) Compute() {
 	}
 }
 
+func (gi *GipInfo) GetAverages() [INFO_MAX_CHANNEL]float64 {
+	return gi.average
+}
+
+func (gi *GipInfo) GetAverage(channel byte) float64 {
+	return gi.average[channel]
+}
+
 func (gi *GipInfo) ShowInfo(channel byte) {
 	fmt.Printf("Min:%d\n", gi.min[channel])
 	fmt.Printf("Max:%d\n", gi.max[channel])
