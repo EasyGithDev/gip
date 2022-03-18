@@ -1,7 +1,7 @@
 package image
 
 import (
-	"github.com/easygithdev/gip/histogram"
+	"github.com/easygithdev/gip/info"
 	"github.com/easygithdev/gip/pixel"
 )
 
@@ -16,12 +16,12 @@ type GoImage struct {
 	channels byte
 	/* Palette-based image pixels */
 	pixels [][]*pixel.GoPixel
-	histo  *histogram.GoHistogram
+	infos  *info.GipInfo
 }
 
 func NewGoImage() *GoImage {
 	img := GoImage{}
-	img.histo = histogram.NewGoHistogram()
+	img.infos = info.NewGipInfo()
 	return &img
 }
 
@@ -60,8 +60,8 @@ func (gi *GoImage) GetPixel(x int, y int) *pixel.GoPixel {
 	return gi.pixels[x][y]
 }
 
-func (gi *GoImage) GetHistogram() *histogram.GoHistogram {
-	return gi.histo
+func (gi *GoImage) GetInfos() *info.GipInfo {
+	return gi.infos
 }
 
 func (gi *GoImage) Compute() {}

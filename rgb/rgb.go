@@ -18,7 +18,7 @@ func ReadRGB(filename string, width int, height int, gi *image.GoImage) {
 
 	gi.SetDimension(width, height)
 	gi.SetChannels(3)
-	histo := gi.GetHistogram()
+	infos := gi.GetInfos()
 	buf := make([]byte, 3)
 	i, j := 0, 0
 
@@ -37,7 +37,7 @@ func ReadRGB(filename string, width int, height int, gi *image.GoImage) {
 			pixel.SetRGBA(buf[0], buf[1], buf[2], 0xff)
 			gi.SetPixel(i, j, pixel)
 
-			histo.SetColor(pixel)
+			infos.SetColor(pixel)
 
 			if i < width-1 {
 				i++

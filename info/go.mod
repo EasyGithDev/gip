@@ -1,4 +1,4 @@
-module github.com/easygithdev/gip/histogram
+module github.com/easygithdev/gip/info
 
 replace github.com/easygithdev/gip/pixel => ../pixel
 

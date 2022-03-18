@@ -7,7 +7,6 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
 	"github.com/easygithdev/gip/image"
-	"github.com/easygithdev/gip/operation"
 	"github.com/easygithdev/gip/rgb"
 )
 
@@ -42,6 +41,8 @@ func main() {
 
 	// gorgba.ReadRGBA("result.rgb", img)
 	rgb.ReadRGB("data/lena_color.rgb", WIDTH, HEIGTH, img)
+	img.GetInfos().Compute()
+	img.GetInfos().ShowInfo(0)
 
 	// matrix := [][]float32{
 	// 	{0.0, 0.0, 0.0},
@@ -63,8 +64,8 @@ func main() {
 	//dest := operation.EMBOSS.Compute(img)
 
 	//	operation.THRESHOLD_BINARY.Compute(img)
-	operation.THRESHOLD_GRAY.Compute(img)
-	createWindow("dest", img)
+	// operation.THRESHOLD_GRAY.Compute(img)
+	// createWindow("dest", img)
 
 	// rgb.WriteRGB("./nice-error.rgb", img)
 

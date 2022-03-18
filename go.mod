@@ -6,7 +6,7 @@ replace github.com/easygithdev/gip/image => ./image
 
 replace github.com/easygithdev/gip/pixel => ./pixel
 
-replace github.com/easygithdev/gip/histogram => ./histogram
+replace github.com/easygithdev/gip/info => ./info
 
 replace github.com/easygithdev/gip/operation => ./operation
 
@@ -21,7 +21,7 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/easygithdev/gip/histogram v0.0.0-00010101000000-000000000000 // indirect
+	github.com/easygithdev/gip/info v0.0.0-00010101000000-000000000000 // indirect
 	github.com/easygithdev/gip/pixel v0.0.0-00010101000000-000000000000 // indirect
 	github.com/fredbi/uri v0.0.0-20181227131451-3dcfdacbaaf3 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
