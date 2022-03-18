@@ -65,7 +65,7 @@ func main() {
 
 	//	operation.THRESHOLD_BINARY.Compute(img)
 	// operation.THRESHOLD_GRAY.Compute(img)
-	// createWindow("dest", img)
+	createWindow("dest", img)
 
 	// rgb.WriteRGB("./nice-error.rgb", img)
 

@@ -15,7 +15,7 @@ type GoImage struct {
 	height   int
 	channels byte
 	/* Palette-based image pixels */
-	pixels [][]*pixel.GoPixel
+	pixels []*pixel.GoPixel
 	infos  *info.GipInfo
 }
 
@@ -28,12 +28,10 @@ func NewGoImage() *GoImage {
 func (gi *GoImage) SetDimension(w int, h int) {
 	gi.width = w
 	gi.height = h
-	gi.pixels = make([][]*pixel.GoPixel, w)
-
-	for i := range gi.pixels {
-		gi.pixels[i] = make([]*pixel.GoPixel, h)
+	gi.pixels = make([]*pixel.GoPixel, w*h)
+	for i := 0; i < w*h; i++ {
+		gi.pixels[i] = pixel.NewGoPixel()
 	}
-
 }
 
 func (gi *GoImage) GetDimension() (int, int) {
@@ -52,12 +50,16 @@ func (gi *GoImage) CreatetPixel() *pixel.GoPixel {
 	return pixel.NewGoPixel()
 }
 
+func (gi *GoImage) GetPixels() []*pixel.GoPixel {
+	return gi.pixels
+}
+
 func (gi *GoImage) SetPixel(x int, y int, gp *pixel.GoPixel) {
-	gi.pixels[x][y] = gp
+	gi.pixels[x*gi.width+y] = gp
 }
 
 func (gi *GoImage) GetPixel(x int, y int) *pixel.GoPixel {
-	return gi.pixels[x][y]
+	return gi.pixels[x*gi.width+y]
 }
 
 func (gi *GoImage) GetInfos() *info.GipInfo {
