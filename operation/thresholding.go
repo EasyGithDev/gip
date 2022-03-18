@@ -29,7 +29,34 @@ var THRESHOLD_BINARY = NewGipThreshold(
 	},
 )
 
-var THRESHOLD_GRAY = NewGipThreshold(
+var THRESHOLD_AVG_GRAY = NewGipThreshold(
+	func(gp *pixel.GoPixel) *pixel.GoPixel {
+
+		r := float32(gp.GetRed())
+		g := float32(gp.GetGreen())
+		b := float32(gp.GetBlue())
+		l := (r + g + b) / 3
+		gp.SetRed(byte(l))
+		gp.SetGreen(byte(l))
+		gp.SetBlue(byte(l))
+
+		return gp
+
+	},
+)
+
+var THRESHOLD_FAST_GRAY = NewGipThreshold(
+	func(gp *pixel.GoPixel) *pixel.GoPixel {
+
+		gp.SetRed(gp.GetGreen())
+		gp.SetBlue(gp.GetGreen())
+
+		return gp
+
+	},
+)
+
+var THRESHOLD_TRUE_GRAY = NewGipThreshold(
 	func(gp *pixel.GoPixel) *pixel.GoPixel {
 
 		r := 0.2126 * float32(gp.GetRed())
@@ -39,6 +66,21 @@ var THRESHOLD_GRAY = NewGipThreshold(
 		gp.SetRed(byte(l))
 		gp.SetGreen(byte(l))
 		gp.SetBlue(byte(l))
+
+		return gp
+
+	},
+)
+
+var THRESHOLD_NEGATIVE = NewGipThreshold(
+	func(gp *pixel.GoPixel) *pixel.GoPixel {
+
+		r := 255 - float32(gp.GetRed())
+		g := 255 - float32(gp.GetGreen())
+		b := 255 - float32(gp.GetBlue())
+		gp.SetRed(byte(r))
+		gp.SetGreen(byte(g))
+		gp.SetBlue(byte(b))
 
 		return gp
 
