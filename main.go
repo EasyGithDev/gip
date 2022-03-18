@@ -12,9 +12,14 @@ import (
 
 const WIDTH = 512
 const HEIGTH = 512
+const FILE = "data/lena_color.rgb"
 
-func createRaster(gi *image.GoImage) *canvas.Raster {
-	return canvas.NewRasterWithPixels(
+func showImage(title string, gi *image.GoImage) {
+
+	myApp := app.New()
+	w := myApp.NewWindow(title)
+
+	raster := canvas.NewRasterWithPixels(
 		func(x, y, w, h int) color.Color {
 
 			pixel := gi.GetPixel(x, y)
@@ -23,26 +28,45 @@ func createRaster(gi *image.GoImage) *canvas.Raster {
 				pixel.GetBlue(),
 				pixel.GetAlpha()}
 		})
+
+	w.Resize(fyne.NewSize(WIDTH, HEIGTH))
+	w.SetContent(raster)
+	w.ShowAndRun()
 }
 
-func createWindow(title string, gi *image.GoImage) {
+func showInfo(img *image.GoImage) {
 
-	myApp := app.New()
-	wSrc := myApp.NewWindow(title)
+	println("********************************************")
+	println("***                RED                   ***")
+	println("********************************************")
+	img.GetInfos().ShowInfo(0)
 
-	wSrc.Resize(fyne.NewSize(WIDTH, HEIGTH))
-	wSrc.SetContent(createRaster(gi))
-	wSrc.ShowAndRun()
+	println("********************************************")
+	println("***                GREEN                 ***")
+	println("********************************************")
+	img.GetInfos().ShowInfo(1)
+
+	println("********************************************")
+	println("***                BLUE                  ***")
+	println("********************************************")
+	img.GetInfos().ShowInfo(2)
 }
 
 func main() {
 
+	// Create the image
 	img := image.NewGoImage()
-
-	// gorgba.ReadRGBA("result.rgb", img)
-	rgb.ReadRGB("data/lena_color.rgb", WIDTH, HEIGTH, img)
+	// Read the file
+	rgb.ReadRGB(FILE, WIDTH, HEIGTH, img)
+	// Compute and show statistique
 	img.GetInfos().Compute()
-	img.GetInfos().ShowInfo(0)
+	showInfo(img)
+
+	// Show the source image
+	showImage("Src", img)
+
+	// Show the dest image
+	// showImage("Dest", img)
 
 	// matrix := [][]float32{
 	// 	{0.0, 0.0, 0.0},
@@ -64,10 +88,14 @@ func main() {
 	//dest := operation.EMBOSS.Compute(img)
 
 	//	operation.THRESHOLD_BINARY.Compute(img)
-	// operation.THRESHOLD_GRAY.Compute(img)
-	createWindow("dest", img)
 
-	// rgb.WriteRGB("./nice-error.rgb", img)
+	// operation.ComputeByValue(img, 220)
+
+	// operation.THRESHOLD_TRUE_GRAY.Compute(img)
+	//	operation.THRESHOLD_AVG_GRAY.Compute(img)
+	// operation.THRESHOLD_FAST_GRAY.Compute(img)
+
+	// operation.THRESHOLD_NEGATIVE.Compute(img)
 
 	// myApp := app.New()
 	// wSrc := myApp.NewWindow("Lena src")

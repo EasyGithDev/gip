@@ -87,6 +87,28 @@ var THRESHOLD_NEGATIVE = NewGipThreshold(
 	},
 )
 
+var FN_BINARY_BY_VALUE = func(gp *pixel.GoPixel, val byte) *pixel.GoPixel {
+
+	if gp.GetRed() >= val {
+		gp.SetRed(255)
+	} else {
+		gp.SetRed(0)
+	}
+
+	if gp.GetGreen() >= val {
+		gp.SetGreen(255)
+	} else {
+		gp.SetGreen(0)
+	}
+
+	if gp.GetBlue() >= val {
+		gp.SetBlue(255)
+	} else {
+		gp.SetBlue(0)
+	}
+	return gp
+}
+
 type GipThreshold struct {
 	threshold byte
 	fn        func(gp *pixel.GoPixel) *pixel.GoPixel
@@ -103,6 +125,19 @@ func (gt *GipThreshold) Compute(gi *image.GoImage) *image.GoImage {
 	for y := 0; y < h; y++ {
 		for x := 0; x < w; x++ {
 			pixel := gt.fn(gi.GetPixel(x, y))
+			gi.SetPixel(x, y, pixel)
+		}
+	}
+
+	return gi
+}
+
+func ComputeByValue(gi *image.GoImage, value byte) *image.GoImage {
+	w, h := gi.GetDimension()
+
+	for y := 0; y < h; y++ {
+		for x := 0; x < w; x++ {
+			pixel := FN_BINARY_BY_VALUE(gi.GetPixel(x, y), value)
 			gi.SetPixel(x, y, pixel)
 		}
 	}
