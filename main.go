@@ -7,6 +7,7 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
 	"github.com/easygithdev/gip/image"
+	"github.com/easygithdev/gip/operation"
 	"github.com/easygithdev/gip/rgb"
 )
 
@@ -54,16 +55,40 @@ func showInfo(img *image.GoImage) {
 
 func main() {
 
+	/////////////////////////////////////////////////////////////
 	// Create the image
+	/////////////////////////////////////////////////////////////
+
 	img := image.NewGoImage()
+
+	/////////////////////////////////////////////////////////////
 	// Read the file
+	/////////////////////////////////////////////////////////////
+
 	rgb.ReadRGB(FILE, WIDTH, HEIGTH, img)
+
+	/////////////////////////////////////////////////////////////
 	// Compute and show statistique
+	/////////////////////////////////////////////////////////////
+
 	img.GetInfos().Compute()
 	showInfo(img)
 
-	// Show the source image
-	showImage("Src", img)
+	/////////////////////////////////////////////////////////////
+	// Compute the threshold
+	/////////////////////////////////////////////////////////////
+
+	// operation.THRESHOLD_BINARY.Compute(img)
+	// operation.THRESHOLD_TRUE_GRAY.Compute(img)
+	// operation.THRESHOLD_AVG_GRAY.Compute(img)
+	// operation.THRESHOLD_FAST_GRAY.Compute(img)
+	// operation.THRESHOLD_NEGATIVE.Compute(img)
+	// operation.ThresholdByValue(img, 220)
+	// operation.ThresholdByAverage(img)
+
+	/////////////////////////////////////////////////////////////
+	// Compute the convolution
+	/////////////////////////////////////////////////////////////
 
 	// Show the dest image
 	// showImage("Dest", img)
@@ -79,34 +104,18 @@ func main() {
 	// dest := conv.Compute(img)
 
 	// dest := operation.BLUR.Compute(img)
-	//dest := operation.GAUSS_3x3.Compute(img)
+	// dest := operation.GAUSS_3x3.Compute(img)
 	// dest := operation.EDGE_DETECTION_1.Compute(img)
 	//dest := operation.EDGE_DETECTION_2.Compute(img)
 	//dest := operation.EDGE_DETECTION_3.Compute(img)
 	//dest := operation.SHARPNESS_IMPROVEMENT.Compute(img)
 	//dest := operation.IDENTITY.Compute(img)
-	//dest := operation.EMBOSS.Compute(img)
+	// dest := operation.EMBOSS.Compute(img)
+	dest := operation.CONNEX.Compute(img)
 
-	//	operation.THRESHOLD_BINARY.Compute(img)
+	/////////////////////////////////////////////////////////////
+	// Show the source image
+	/////////////////////////////////////////////////////////////
 
-	// operation.ComputeByValue(img, 220)
-
-	// operation.THRESHOLD_TRUE_GRAY.Compute(img)
-	//	operation.THRESHOLD_AVG_GRAY.Compute(img)
-	// operation.THRESHOLD_FAST_GRAY.Compute(img)
-
-	// operation.THRESHOLD_NEGATIVE.Compute(img)
-
-	// myApp := app.New()
-	// wSrc := myApp.NewWindow("Lena src")
-	// wDest := myApp.NewWindow("Lena dest")
-
-	// wSrc.Resize(fyne.NewSize(WIDTH, HEIGTH))
-	// wSrc.SetContent(createRaster(img))
-	// wSrc.ShowAndRun()
-
-	// wDest.Resize(fyne.NewSize(WIDTH, HEIGTH))
-	// wDest.SetContent(createRaster(img))
-	// wDest.ShowAndRun()
-
+	showImage("Src", dest)
 }
