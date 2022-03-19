@@ -69,5 +69,3 @@ func (gi *GoImage) GetPixel(x int, y int) *pixel.GoPixel {
 func (gi *GoImage) GetInfos() *info.GipInfo {
 	return gi.infos
 }
-
-func (gi *GoImage) Compute() {}

@@ -6,16 +6,16 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
-	"github.com/easygithdev/gip/gray"
 	"github.com/easygithdev/gip/image"
 	"github.com/easygithdev/gip/operation"
+	"github.com/easygithdev/gip/rgb"
 )
 
 const RGB_WIDTH = 512
 const RGB_HEIGTH = 512
 const GRAY_WIDTH = 512
 const GRAY_HEIGTH = 512
-const RGB_FILE = "data/lena.rgb"
+const RGB_FILE = "data/lena_512x512.rgb"
 const GRAY_FILE = "data/barbara_gray.raw"
 
 func showRgb(title string, gi *image.GoImage) {
@@ -88,8 +88,8 @@ func main() {
 	// Read the file
 	/////////////////////////////////////////////////////////////
 
-	// rgb.ReadRGB(RGB_FILE, WIDTH, HEIGTH, img)
-	gray.ReadGray(GRAY_FILE, GRAY_WIDTH, GRAY_HEIGTH, img)
+	rgb.ReadRGB(RGB_FILE, RGB_WIDTH, RGB_HEIGTH, img)
+	// gray.ReadGray(GRAY_FILE, GRAY_WIDTH, GRAY_HEIGTH, img)
 
 	/////////////////////////////////////////////////////////////
 	// Compute and show statistique
@@ -117,6 +117,11 @@ func main() {
 	// operation.ThresholdByAverage(img)
 
 	/////////////////////////////////////////////////////////////
+	// Compute the transformations
+	/////////////////////////////////////////////////////////////
+	dest := operation.NewGipTransformation().Compute(img)
+
+	/////////////////////////////////////////////////////////////
 	// Compute the convolution
 	/////////////////////////////////////////////////////////////
 
@@ -134,7 +139,7 @@ func main() {
 	// dest := conv.Compute(img)
 
 	// dest := operation.BLUR.Compute(img)
-	dest := operation.GAUSS_3x3.Compute(img)
+	//dest := operation.GAUSS_3x3.Compute(img)
 	// dest := operation.EDGE_DETECTION_1.Compute(img)
 	//dest := operation.EDGE_DETECTION_2.Compute(img)
 	//dest := operation.EDGE_DETECTION_3.Compute(img)
@@ -147,5 +152,7 @@ func main() {
 	// Show the dest image
 	/////////////////////////////////////////////////////////////
 
-	showGray("Dest", dest)
+	// showGray("Dest", dest)
+	showRgb("Dest", dest)
+
 }
