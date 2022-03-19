@@ -38,6 +38,10 @@ func (gi *GoImage) GetDimension() (int, int) {
 	return gi.width, gi.height
 }
 
+func (gi *GoImage) GetSize() int {
+	return gi.width * gi.height
+}
+
 func (gi *GoImage) SetChannels(channels byte) {
 	gi.channels = channels
 }

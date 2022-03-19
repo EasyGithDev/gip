@@ -10,8 +10,10 @@ import (
 	"github.com/easygithdev/gip/image"
 )
 
-const WIDTH = 512
-const HEIGTH = 512
+const RGB_WIDTH = 512
+const RGB_HEIGTH = 512
+const GRAY_WIDTH = 256
+const GRAY_HEIGTH = 256
 const RGB_FILE = "data/lena.rgb"
 const GRAY_FILE = "data/lena.gray"
 
@@ -19,6 +21,8 @@ func showRgb(title string, gi *image.GoImage) {
 
 	myApp := app.New()
 	w := myApp.NewWindow(title)
+
+	width, height := gi.GetDimension()
 
 	raster := canvas.NewRasterWithPixels(
 		func(x, y, w, h int) color.Color {
@@ -30,7 +34,7 @@ func showRgb(title string, gi *image.GoImage) {
 				pixel.GetAlpha()}
 		})
 
-	w.Resize(fyne.NewSize(WIDTH, HEIGTH))
+	w.Resize(fyne.NewSize(float32(width), float32(height)))
 	w.SetContent(raster)
 	w.ShowAndRun()
 }
@@ -39,6 +43,7 @@ func showGray(title string, gi *image.GoImage) {
 
 	myApp := app.New()
 	w := myApp.NewWindow(title)
+	width, height := gi.GetDimension()
 
 	raster := canvas.NewRasterWithPixels(
 		func(x, y, w, h int) color.Color {
@@ -47,7 +52,7 @@ func showGray(title string, gi *image.GoImage) {
 			return color.Gray{pixel.GetRed()}
 		})
 
-	w.Resize(fyne.NewSize(WIDTH, HEIGTH))
+	w.Resize(fyne.NewSize(float32(width), float32(height)))
 	w.SetContent(raster)
 	w.ShowAndRun()
 }
@@ -83,7 +88,7 @@ func main() {
 	/////////////////////////////////////////////////////////////
 
 	// rgb.ReadRGB(RGB_FILE, WIDTH, HEIGTH, img)
-	gray.ReadGray(GRAY_FILE, WIDTH, HEIGTH, img)
+	gray.ReadGray(GRAY_FILE, GRAY_WIDTH, GRAY_HEIGTH, img)
 
 	/////////////////////////////////////////////////////////////
 	// Compute and show statistique
