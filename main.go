@@ -8,14 +8,15 @@ import (
 	"fyne.io/fyne/v2/canvas"
 	"github.com/easygithdev/gip/gray"
 	"github.com/easygithdev/gip/image"
+	"github.com/easygithdev/gip/operation"
 )
 
 const RGB_WIDTH = 512
 const RGB_HEIGTH = 512
-const GRAY_WIDTH = 256
-const GRAY_HEIGTH = 256
+const GRAY_WIDTH = 512
+const GRAY_HEIGTH = 512
 const RGB_FILE = "data/lena.rgb"
-const GRAY_FILE = "data/lena.gray"
+const GRAY_FILE = "data/barbara_gray.raw"
 
 func showRgb(title string, gi *image.GoImage) {
 
@@ -101,7 +102,7 @@ func main() {
 	// Show the src image
 	/////////////////////////////////////////////////////////////
 
-	showGray("Src", img)
+	//showGray("Src", img)
 
 	/////////////////////////////////////////////////////////////
 	// Compute the threshold
@@ -133,18 +134,18 @@ func main() {
 	// dest := conv.Compute(img)
 
 	// dest := operation.BLUR.Compute(img)
-	// dest := operation.GAUSS_3x3.Compute(img)
+	dest := operation.GAUSS_3x3.Compute(img)
 	// dest := operation.EDGE_DETECTION_1.Compute(img)
 	//dest := operation.EDGE_DETECTION_2.Compute(img)
 	//dest := operation.EDGE_DETECTION_3.Compute(img)
 	//dest := operation.SHARPNESS_IMPROVEMENT.Compute(img)
 	//dest := operation.IDENTITY.Compute(img)
-	// dest := operation.EMBOSS.Compute(img)
-	// dest := operation.CONNEX.Compute(img)
+	//dest := operation.EMBOSS.Compute(img)
+	//dest := operation.CONNEX.Compute(img)
 
 	/////////////////////////////////////////////////////////////
 	// Show the dest image
 	/////////////////////////////////////////////////////////////
 
-	// showImage("Dest", dest)
+	showGray("Dest", dest)
 }

@@ -1,7 +1,6 @@
 # directory structure
 bin/*
 pkg/*
-data/*
 !.gitkeep
 
 # goop - go package manager
