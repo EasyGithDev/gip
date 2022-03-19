@@ -6,16 +6,16 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
+	"github.com/easygithdev/gip/gray"
 	"github.com/easygithdev/gip/image"
-	"github.com/easygithdev/gip/operation"
-	"github.com/easygithdev/gip/rgb"
 )
 
 const WIDTH = 512
 const HEIGTH = 512
-const FILE = "data/lena_color.rgb"
+const RGB_FILE = "data/lena.rgb"
+const GRAY_FILE = "data/lena.gray"
 
-func showImage(title string, gi *image.GoImage) {
+func showRgb(title string, gi *image.GoImage) {
 
 	myApp := app.New()
 	w := myApp.NewWindow(title)
@@ -28,6 +28,23 @@ func showImage(title string, gi *image.GoImage) {
 				pixel.GetGreen(),
 				pixel.GetBlue(),
 				pixel.GetAlpha()}
+		})
+
+	w.Resize(fyne.NewSize(WIDTH, HEIGTH))
+	w.SetContent(raster)
+	w.ShowAndRun()
+}
+
+func showGray(title string, gi *image.GoImage) {
+
+	myApp := app.New()
+	w := myApp.NewWindow(title)
+
+	raster := canvas.NewRasterWithPixels(
+		func(x, y, w, h int) color.Color {
+
+			pixel := gi.GetPixel(x, y)
+			return color.Gray{pixel.GetRed()}
 		})
 
 	w.Resize(fyne.NewSize(WIDTH, HEIGTH))
@@ -65,7 +82,8 @@ func main() {
 	// Read the file
 	/////////////////////////////////////////////////////////////
 
-	rgb.ReadRGB(FILE, WIDTH, HEIGTH, img)
+	// rgb.ReadRGB(RGB_FILE, WIDTH, HEIGTH, img)
+	gray.ReadGray(GRAY_FILE, WIDTH, HEIGTH, img)
 
 	/////////////////////////////////////////////////////////////
 	// Compute and show statistique
@@ -73,6 +91,12 @@ func main() {
 
 	img.GetInfos().Compute()
 	showInfo(img)
+
+	/////////////////////////////////////////////////////////////
+	// Show the src image
+	/////////////////////////////////////////////////////////////
+
+	showGray("Src", img)
 
 	/////////////////////////////////////////////////////////////
 	// Compute the threshold
@@ -111,11 +135,11 @@ func main() {
 	//dest := operation.SHARPNESS_IMPROVEMENT.Compute(img)
 	//dest := operation.IDENTITY.Compute(img)
 	// dest := operation.EMBOSS.Compute(img)
-	dest := operation.CONNEX.Compute(img)
+	// dest := operation.CONNEX.Compute(img)
 
 	/////////////////////////////////////////////////////////////
-	// Show the source image
+	// Show the dest image
 	/////////////////////////////////////////////////////////////
 
-	showImage("Src", dest)
+	// showImage("Dest", dest)
 }

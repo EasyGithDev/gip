@@ -12,11 +12,12 @@ replace github.com/easygithdev/gip/operation => ./operation
 
 replace github.com/easygithdev/gip/rgb => ./rgb
 
+replace github.com/easygithdev/gip/gray => ./gray
+
 require (
 	fyne.io/fyne/v2 v2.1.3
+	github.com/easygithdev/gip/gray v0.0.0-00010101000000-000000000000
 	github.com/easygithdev/gip/image v0.0.0-00010101000000-000000000000
-	github.com/easygithdev/gip/operation v0.0.0-00010101000000-000000000000
-	github.com/easygithdev/gip/rgb v0.0.0-00010101000000-000000000000
 )
 
 require (
